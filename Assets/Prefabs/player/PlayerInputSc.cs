@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,9 +22,13 @@ public class PlayerInputSc : MonoBehaviour
 
     public InputActionReference directionActionReference;
     public InputActionReference jumpActionReference;
-    public InputActionReference turnCameraReference;
+    public InputActionReference turnCameraActionReference;
+    public InputActionReference fireActionReference;
 
     private CharacterController controller;
+
+    [SerializeField]
+    private ShootManagementSc shootManagement;
 
     void Start()
     {
@@ -40,7 +45,9 @@ public class PlayerInputSc : MonoBehaviour
 
         jumpActionReference.action.performed += JumpAction;
 
-        turnCameraReference.action.performed += TurnAction;
+        turnCameraActionReference.action.performed += TurnAction;
+
+        fireActionReference.action.performed += FireAction;
     }
 
     void OnDisable()
@@ -50,7 +57,9 @@ public class PlayerInputSc : MonoBehaviour
         
         jumpActionReference.action.performed -= JumpAction;
         
-        turnCameraReference.action.performed -= TurnAction;
+        turnCameraActionReference.action.performed -= TurnAction;
+
+        fireActionReference.action.performed -= FireAction;
     }
 
     void DirectionAction(InputAction.CallbackContext callback)
@@ -67,6 +76,16 @@ public class PlayerInputSc : MonoBehaviour
     {
         Vector2 look = callback.ReadValue<Vector2>();
         ChangeRotation(look);
+    }
+
+    void FireAction(InputAction.CallbackContext callback)
+    {
+        Vector3 source = transform.position;
+        Vector3 target = transform.position + (transform.forward * 10);
+        shootManagement.AddShoot(new ShootPathingSc(
+            source,
+            target
+        ));
     }
 
     void DirectionActionCancel(InputAction.CallbackContext callback)

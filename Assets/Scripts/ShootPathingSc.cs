@@ -4,6 +4,14 @@ using UnityEngine;
 [Serializable]
 public class ShootPathingSc
 {
+    public ShootPathingSc(Vector3 source, Vector3 target)
+    {
+        this.source = source;
+        this.target = target;
+        this.speed = 2;
+        this.currentPosition = source;
+    }
+
     [SerializeField]
     private Vector3 source;
 
@@ -20,10 +28,15 @@ public class ShootPathingSc
     {
         return currentPosition;
     }
+    
+    public bool TargetReached()
+    {
+        return this.TargetReached(currentPosition);
+    }
 
     public bool TargetReached(Vector3 position)
     {
-        return (position - source).magnitude > (target - source).magnitude;
+        return (position - source).magnitude >= (target - source).magnitude;
     }
 
     public void UpdatePosition()
