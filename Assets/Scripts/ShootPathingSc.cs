@@ -39,20 +39,27 @@ public class ShootPathingSc
         return (position - source).magnitude >= (target - source).magnitude;
     }
 
-    public void UpdatePosition()
+    public void UpdatePosition(out RaycastHit hit, out bool hasHit)
     {
-        Vector3 deltaMove = (target - source).normalized * speed * Time.deltaTime;
+        Vector3 deltaMove = GetDirection() * speed * Time.deltaTime;
         Vector3 nextPosistion = deltaMove + currentPosition;
         if (TargetReached(nextPosistion))
         {
             currentPosition = target;
+            hasHit = Physics.Raycast(currentPosition, target, out hit);
             return;
         }
+        hasHit = Physics.Raycast(currentPosition, nextPosistion, out hit);
         currentPosition = nextPosistion;
     }
 
     public void DrawPath()
     {
         Debug.DrawLine(source, target);
+    }
+
+    public Vector3 GetDirection()
+    {
+        return (target - source).normalized;
     }
 }

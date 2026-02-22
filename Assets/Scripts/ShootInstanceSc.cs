@@ -16,11 +16,23 @@ public class ShootInstanceSc
     [SerializeField]
     private GameObject bulletObj;
 
+    private RaycastHit hit;
+    private bool hasHit;
+
     public void Update()
     {
-        shootPathing.UpdatePosition();
+        shootPathing.UpdatePosition(out hit, out hasHit);
         bulletObj.transform.position = shootPathing.GetPosition();
         shootPathing.DrawPath();
+        ApplyHitAction();
+    }
+
+    void ApplyHitAction()
+    {
+        if (hasHit)
+        {
+            hit.rigidbody.AddForce(shootPathing.GetDirection() * (float) SpellUtils.ManaContentToForce(100));
+        }
     }
 
     public void Delete()
@@ -30,6 +42,6 @@ public class ShootInstanceSc
 
     public bool TargetReached()
     {
-        return shootPathing.TargetReached();
+        return hasHit || shootPathing.TargetReached();
     }
 }
