@@ -4,11 +4,11 @@ using UnityEngine;
 [Serializable]
 public class ShootPathingSc
 {
-    public ShootPathingSc(Vector3 source, Vector3 target)
+    public ShootPathingSc(Vector3 source, Vector3 target, float speed)
     {
         this.source = source;
         this.target = target;
-        this.speed = 2;
+        this.speed = speed;
         this.currentPosition = source;
     }
 

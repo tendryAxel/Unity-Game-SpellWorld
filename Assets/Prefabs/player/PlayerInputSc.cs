@@ -84,7 +84,8 @@ public class PlayerInputSc : MonoBehaviour
         Vector3 target = transform.position + (transform.forward * 10);
         shootManagement.AddShoot(new ShootPathingSc(
             source,
-            target
+            target,
+            10
         ));
     }
 
