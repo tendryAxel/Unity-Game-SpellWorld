@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 3224782287340862635}
   - component: {fileID: 9216176785371374634}
   - component: {fileID: 6807660496402619751}
+  - component: {fileID: -6189752167152467577}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -191,7 +192,9 @@ MonoBehaviour:
   lookSensitivity: 0.5
   directionActionReference: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpActionReference: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  turnCameraReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  turnCameraActionReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  fireActionReference: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  shootManagement: {fileID: 0}
 --- !u!143 &6807660496402619751
 CharacterController:
   m_ObjectHideFlags: 0
@@ -217,6 +220,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6189752167152467577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048282871792349515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a556c16499358844691f21c7889303a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpellSc
+  shoots:
+  - {fileID: 11400000, guid: 2331f5de971e5404caca824edd4d42c2, type: 2}
+  currentShootId: 0
 --- !u!1 &7736286604097016984
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,11 @@ using UnityEngine;
 [Serializable]
 public class ShootInstanceSc
 {
-    public ShootInstanceSc(ShootPathingSc shootPathing, GameObject bulletObj)
+    public ShootInstanceSc(ShootPathingSc shootPathing, GameObject bulletObj, ShootData data)
     {
         this.shootPathing = shootPathing;
         this.bulletObj = bulletObj;
+        this.data = data;
     }
 
     [SerializeField]
@@ -18,6 +19,7 @@ public class ShootInstanceSc
 
     private RaycastHit hit;
     private bool hasHit;
+    private ShootData data;
 
     public void Update()
     {
@@ -31,7 +33,7 @@ public class ShootInstanceSc
     {
         if (hasHit)
         {
-            hit.rigidbody.AddForce(shootPathing.GetDirection() * (float) SpellUtils.ManaContentToForce(100));
+            hit.rigidbody.AddForce(shootPathing.GetDirection() * (float) SpellUtils.ManaContentToForce(data.Mana));
         }
     }
 

@@ -30,12 +30,15 @@ public class PlayerInputSc : MonoBehaviour
     [SerializeField]
     private ShootManagementSc shootManagement;
 
+    private PlayerSpellSc playerSpell;
+
     void Start()
     {
         Application.targetFrameRate = FPS;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         controller = GetComponent<CharacterController>();
+        playerSpell = GetComponent<PlayerSpellSc>();
     }
 
     void OnEnable()
@@ -82,11 +85,11 @@ public class PlayerInputSc : MonoBehaviour
     {
         Vector3 source = transform.position;
         Vector3 target = transform.position + (transform.forward * 10);
-        shootManagement.AddShoot(new ShootPathingSc(
-            source,
-            target,
-            10
-        ));
+
+        shootManagement.AddShoot(
+            this.playerSpell.GetCurrentShootData(),
+            source, target
+        );
     }
 
     void DirectionActionCancel(InputAction.CallbackContext callback)

@@ -825,7 +825,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   shootInstances: []
-  bulletPrefab: {fileID: 1528797445904699021, guid: 71b325ace32b2f8488c68573167df145, type: 3}
 --- !u!4 &1414389243
 Transform:
   m_ObjectHideFlags: 0
@@ -906,6 +905,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6189752167152467577, guid: 84fa6b0c06b91b042a5ecbafc6f33d29, type: 3}
+      propertyPath: currentShootId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6189752167152467577, guid: 84fa6b0c06b91b042a5ecbafc6f33d29, type: 3}
+      propertyPath: shoots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6189752167152467577, guid: 84fa6b0c06b91b042a5ecbafc6f33d29, type: 3}
+      propertyPath: 'shoots.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c5f6c730770f5fb47aa408a20a7bc029, type: 2}
     - target: {fileID: 3224782287340862635, guid: 84fa6b0c06b91b042a5ecbafc6f33d29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

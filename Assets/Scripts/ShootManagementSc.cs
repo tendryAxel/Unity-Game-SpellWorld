@@ -8,9 +8,6 @@ public class ShootManagementSc : MonoBehaviour
 {
     [SerializeField]
     private List<ShootInstanceSc> shootInstances;
-    
-    [SerializeField]
-    private GameObject bulletPrefab;
 
     private List<ShootInstanceSc> toRemove = new List<ShootInstanceSc>();
 
@@ -41,9 +38,17 @@ public class ShootManagementSc : MonoBehaviour
         toRemove.Clear();
     }
 
-    public void AddShoot(ShootPathingSc path)
+    public void AddShoot(ShootData shoot, Vector3 source, Vector3 target)
     {
-        GameObject instance = Instantiate(bulletPrefab);
-        shootInstances.Add(new ShootInstanceSc(path, instance));
+        GameObject instance = Instantiate(shoot.BulletPrefab);
+        shootInstances.Add(new ShootInstanceSc(
+            new ShootPathingSc(
+                source,
+                target,
+                shoot.Speed
+            ),
+            instance,
+            shoot
+        ));
     }
 }
