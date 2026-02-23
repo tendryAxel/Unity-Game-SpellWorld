@@ -149,6 +149,8 @@ GameObject:
   - component: {fileID: 9216176785371374634}
   - component: {fileID: 6807660496402619751}
   - component: {fileID: -6189752167152467577}
+  - component: {fileID: -8509229034060313646}
+  - component: {fileID: 6830124687831863185}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -235,6 +237,35 @@ MonoBehaviour:
   shoots:
   - {fileID: 11400000, guid: 2331f5de971e5404caca824edd4d42c2, type: 2}
   currentShootId: 0
+--- !u!114 &-8509229034060313646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048282871792349515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9afad0fc81de854981ad5d80205359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthPointStats
+  maxHealthPoints: 100
+  healthPoints: 0
+--- !u!114 &6830124687831863185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048282871792349515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e6396b0dca5a54795f6d15cb8804d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManaPointStats
+  maxManaPoints: 100
+  manaPoints: 0
+  manaOutputRate: 10
 --- !u!1 &7736286604097016984
 GameObject:
   m_ObjectHideFlags: 0
