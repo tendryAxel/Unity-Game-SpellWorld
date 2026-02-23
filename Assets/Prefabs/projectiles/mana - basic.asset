@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: mana - basic
   m_EditorClassIdentifier: Assembly-CSharp::ShootData
   bulletPrefab: {fileID: 1528797445904699021, guid: 71b325ace32b2f8488c68573167df145, type: 3}
-  impactPrefab: {fileID: 0}
+  impactData: {fileID: 11400000, guid: f909b73795f52414ba56dc6ca99657f5, type: 2}
   speed: 10
   mana: 10

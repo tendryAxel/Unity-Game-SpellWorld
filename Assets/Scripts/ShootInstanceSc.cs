@@ -46,4 +46,15 @@ public class ShootInstanceSc
     {
         return hasHit || shootPathing.TargetReached();
     }
+
+    public void ShowImpactOnHit(ImpactManagementSc impactManagement)
+    {
+        if (!hasHit)
+        {
+            Debug.LogWarning("Nothing was hit by: " + this);
+            return;
+        }
+        
+        impactManagement.AddImpact(data.ImpactData, hit.point);
+    }
 }

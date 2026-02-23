@@ -84,7 +84,7 @@ public class PlayerInputSc : MonoBehaviour
     void FireAction(InputAction.CallbackContext callback)
     {
         Vector3 source = transform.position;
-        Vector3 target = transform.position + (transform.forward * 10);
+        Vector3 target = transform.position + (transform.forward * 500);
 
         shootManagement.AddShoot(
             this.playerSpell.GetCurrentShootData(),

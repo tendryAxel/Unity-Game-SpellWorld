@@ -7,7 +7,7 @@ public class ShootData : ScriptableObject
     private GameObject bulletPrefab;
 
     [SerializeField]
-    private GameObject impactPrefab;
+    private ImpactData impactData;
 
     [SerializeField]
     private float speed;
@@ -16,7 +16,7 @@ public class ShootData : ScriptableObject
     private long mana;
 
     public GameObject BulletPrefab => bulletPrefab;
-    public GameObject ImpactPrefab => impactPrefab;
+    public ImpactData ImpactData => impactData;
     public float Speed => speed;
     public long Mana => mana;
 }

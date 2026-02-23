@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264a0883507621341a67bcf63fd0bb38, type: 3}
+  m_Name: impact - burst simple
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactData
+  impactPrefab: {fileID: 1029464937492562709, guid: 4032411457770a94dbf2b8b52aae1fff, type: 3}
+  lifeTimeInSecond: 5

@@ -11,6 +11,9 @@ public class ShootManagementSc : MonoBehaviour
 
     private List<ShootInstanceSc> toRemove = new List<ShootInstanceSc>();
 
+    [SerializeField]
+    private ImpactManagementSc impactManagement;
+
     void Update()
     {
         foreach (ShootInstanceSc shootInstance in shootInstances)
@@ -31,6 +34,7 @@ public class ShootManagementSc : MonoBehaviour
 
         foreach (ShootInstanceSc shootInstance in toRemove)
         {
+            shootInstance.ShowImpactOnHit(impactManagement);
             shootInstance.Delete();
             shootInstances.Remove(shootInstance);
         }
