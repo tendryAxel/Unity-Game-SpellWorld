@@ -2,27 +2,29 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManaPointStats : MonoBehaviour
+public class ManaPointStats : AbstractModifiableStats
 {
-    [Header("Mana Points")]
-    [SerializeField]
-    private float maxManaPoints;
-    public float GetMaxManaPoints => maxManaPoints;
-    [SerializeField]
-    private float manaPoints;
-    public float GetManaPoints => manaPoints;
     [SerializeField]
     private float manaOutputRate;
     public float GetManaOutputRate => manaOutputRate;
 
     public void TakeMana(float requested)
     {
-        if (manaPoints < requested)
+        if (GetValue < requested)
         {
-            Debug.LogWarning("Not Enough mana");
-            return;
+            throw new NotEnoughManaException(GetValue, requested);
         }
 
-        manaPoints -= requested;
+        AddToValue(-requested);
     }
+}
+
+[System.Serializable]
+public class NotEnoughManaException : System.Exception
+{
+    public NotEnoughManaException(float avalaible, float requested) : base("Not enough mana. Only: " + avalaible + " avalaible but: " + requested + " requested") { }
+    public NotEnoughManaException(string message, System.Exception inner) : base(message, inner) {}
+    protected NotEnoughManaException(
+        System.Runtime.Serialization.SerializationInfo info,
+        System.Runtime.Serialization.StreamingContext context) : base(info, context) {}
 }

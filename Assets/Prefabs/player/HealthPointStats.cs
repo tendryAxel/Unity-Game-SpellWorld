@@ -2,21 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPointStats : MonoBehaviour
+public class HealthPointStats : AbstractModifiableStats
 {
-    [Header("Health Points")]
-    [SerializeField]
-    private float maxHealthPoints;
-    public float GetMaxHealthPoints => maxHealthPoints;
-    [SerializeField]
-    private float healthPoints;
-    public float GetHealthPoints => healthPoints;
-
     [Header("Stats change")]
     [SerializeField]
     private List<Action> deathActions;
-    [SerializeField]
-    private List<Action> onChangeActions;
 
     public void TakeDamage(float manaDamage)
     {
@@ -27,14 +17,14 @@ public class HealthPointStats : MonoBehaviour
             return;
         }
 
-        var nextHealthPoints = healthPoints - damage;
+        var nextHealthPoints = GetValue - damage;
         if (nextHealthPoints < 0)
         {
             DeathEvent();
             return;
         }
 
-        healthPoints = nextHealthPoints;
+        SetValue(nextHealthPoints);
     }
 
     float ManaDamageToHPDamage(float manaDamage)

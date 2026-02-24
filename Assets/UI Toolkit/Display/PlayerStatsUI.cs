@@ -6,8 +6,10 @@ public class PlayerStatsUI : MonoBehaviour
     private Label hpLabel;
     private Label manaLabel;
 
-    private int hp = 100;
-    private int mana = 50;
+    [SerializeField]
+    private HealthPointStats hpStats;
+    [SerializeField]
+    private ManaPointStats manaStats;
 
     void OnEnable()
     {
@@ -16,19 +18,20 @@ public class PlayerStatsUI : MonoBehaviour
         hpLabel = root.Q<Label>("hpLabel");
         manaLabel = root.Q<Label>("manaLabel");
 
-        Refresh();
+        ChangeHp(hpStats.GetValue);
+        ChangeMana(manaStats.GetValue);
+
+        hpStats.AddOnChangeAction(ChangeHp);
+        manaStats.AddOnChangeAction(ChangeMana);
     }
 
-    public void SetStats(int newHp, int newMana)
+    private void ChangeHp(float newHp)
     {
-        hp = newHp;
-        mana = newMana;
-        Refresh();
+        hpLabel.text = $"HP: {newHp}";
     }
 
-    private void Refresh()
+    private void ChangeMana(float newMana)
     {
-        hpLabel.text = $"HP: {hp}";
-        manaLabel.text = $"Mana: {mana}";
+        manaLabel.text = $"Mana: {newMana}";
     }
 }

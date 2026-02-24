@@ -32,6 +32,9 @@ public class PlayerInputSc : MonoBehaviour
 
     private PlayerSpellSc playerSpell;
 
+    [SerializeField]
+    private ManaPointStats manaPointStats;
+
     void Start()
     {
         Application.targetFrameRate = FPS;
@@ -86,10 +89,19 @@ public class PlayerInputSc : MonoBehaviour
         Vector3 source = transform.position;
         Vector3 target = transform.position + (transform.forward * 500);
 
-        shootManagement.AddShoot(
-            this.playerSpell.GetCurrentShootData(),
-            source, target
-        );
+        try
+        {
+            manaPointStats.TakeMana(10);
+
+            shootManagement.AddShoot(
+                this.playerSpell.GetCurrentShootData(),
+                source, target
+            );
+        }
+        catch (NotEnoughManaException e)
+        {
+            Debug.LogWarning("Not Enough mana.\n" + e);
+        }
     }
 
     void DirectionActionCancel(InputAction.CallbackContext callback)
