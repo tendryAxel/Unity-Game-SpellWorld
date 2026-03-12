@@ -29,6 +29,8 @@ public class PlayerStatsUI : MonoBehaviour
         hpStats.AddOnChangeAction(ChangeHp);
         manaStats.AddOnChangeAction(ChangeMana);
         playerSpell.RegisterOnHandedManaPercentageChange(ChangeHandedPercentage);
+
+        chargeProgress.EnableLabel(false);
     }
 
     private void ChangeHp(float newHp)

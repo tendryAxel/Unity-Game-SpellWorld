@@ -41,6 +41,7 @@ namespace MyUILibrary
 
         // This is the label that displays the percentage.
         Label m_Label;
+        private bool enableLabel = true;
 
         // This is the number that the Label displays as a percentage.
         float m_Progress;
@@ -55,9 +56,26 @@ namespace MyUILibrary
                 // Whenever the progress property changes, MarkDirtyRepaint() is named. This causes a call to the
                 // generateVisualContents callback.
                 m_Progress = value;
-                m_Label.text = Mathf.Clamp(Mathf.Round(value), 0, 100) + "%";
+                if (enableLabel)
+                {
+                    m_Label.text = Mathf.Clamp(Mathf.Round(value), 0, 100) + "%";
+                }
                 MarkDirtyRepaint();
             }
+        }
+
+        public void EnableLabel(bool value)
+        {
+            if (enableLabel == value)
+            {
+                return;
+            }
+            if (!value)
+            {
+                m_Label.text = "";
+                m_Label = null;
+            }
+            enableLabel = value;
         }
 
         // This default constructor is RadialProgress's only constructor.
