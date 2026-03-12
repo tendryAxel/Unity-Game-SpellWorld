@@ -5,6 +5,8 @@ public class DoorSc : MonoBehaviour
 {
     [SerializeField]
     private string sceneAfterPassingTheDoor;
+    [SerializeField]
+    private Vector3 offset;
 
     void OnTriggerEnter(Collider other)
     {
@@ -13,6 +15,10 @@ public class DoorSc : MonoBehaviour
         {
             Debug.Log("Load scene " + sceneAfterPassingTheDoor);
             SceneManager.LoadScene(sceneAfterPassingTheDoor);
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log("Player found: " + player);
+            player.transform.position = offset;
         }
     }
 }

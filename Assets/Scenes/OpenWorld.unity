@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   sceneAfterPassingTheDoor: Indoor
+  offset: {x: -8.01, y: 1.81, z: -0.41}
 --- !u!65 &111685166
 BoxCollider:
   m_ObjectHideFlags: 0
