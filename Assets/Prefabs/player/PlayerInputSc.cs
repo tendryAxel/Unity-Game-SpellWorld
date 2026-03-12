@@ -143,8 +143,7 @@ public class PlayerInputSc : MonoBehaviour
 
         if (isFireActionHolded)
         {
-            // TODO: need to be renamed
-            this.playerSpell.Shoot();
+            this.playerSpell.LoadAndShoot();
         } else
         {
             this.playerSpell.CancelManaHolding();

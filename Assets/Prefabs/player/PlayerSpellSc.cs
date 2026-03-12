@@ -15,9 +15,7 @@ public class PlayerSpellSc : MonoBehaviour
 
     [SerializeField]
     private ShootManagementSc shootManagement;
-
-    // TODO: remove SerializeField
-    [SerializeField]
+    
     private float handedMana = 0;
 
     public ShootData GetCurrentShootData()
@@ -30,7 +28,7 @@ public class PlayerSpellSc : MonoBehaviour
         handedMana = 0;
     }
 
-    public void Shoot()
+    public void LoadAndShoot()
     {
         ShootData toShoot = this.GetCurrentShootData();
         float neededMana = toShoot.Mana - handedMana;
