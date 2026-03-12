@@ -1207,6 +1207,10 @@ PrefabInstance:
       propertyPath: value
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6830124687831863185, guid: 84fa6b0c06b91b042a5ecbafc6f33d29, type: 3}
+      propertyPath: manaOutputRate
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7048282871792349515, guid: 84fa6b0c06b91b042a5ecbafc6f33d29, type: 3}
       propertyPath: m_Name
       value: Player

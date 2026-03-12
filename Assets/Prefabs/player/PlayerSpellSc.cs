@@ -18,14 +18,25 @@ public class PlayerSpellSc : MonoBehaviour
     
     private float handedMana = 0;
 
+    private List<Action<int>> onHandedManaPercentageChange = new();
+
     public ShootData GetCurrentShootData()
     {
         return shoots[currentShootId];
     }
 
+    private void SetHandedMana(float value)
+    {
+        handedMana = value;
+        foreach (Action<int> action in onHandedManaPercentageChange)
+        {
+            action(GetSpellChargingPercent());
+        }
+    }
+
     public void CancelManaHolding()
     {
-        handedMana = 0;
+        SetHandedMana(0);
     }
 
     public void LoadAndShoot()
@@ -41,7 +52,7 @@ public class PlayerSpellSc : MonoBehaviour
                 CancelManaHolding();
                 throw new NotEnoughManaException(manaPointStats.GetValue, idlelyNeededToBeDelivered);
             }
-            handedMana += idlelyNeededToBeDelivered;
+            SetHandedMana(handedMana + idlelyNeededToBeDelivered);
 
             return;
         }
@@ -68,8 +79,13 @@ public class PlayerSpellSc : MonoBehaviour
         }
     }
 
-    public int GetSpellChargingPercent()
+    private int GetSpellChargingPercent()
     {
         return (int) (handedMana / this.GetCurrentShootData().Mana * 100);
+    }
+    
+    public void RegisterOnHandedManaPercentageChange(Action<int> action)
+    {
+        onHandedManaPercentageChange.Add(action);
     }
 }

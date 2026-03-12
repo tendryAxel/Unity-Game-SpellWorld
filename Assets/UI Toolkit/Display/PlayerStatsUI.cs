@@ -28,12 +28,7 @@ public class PlayerStatsUI : MonoBehaviour
 
         hpStats.AddOnChangeAction(ChangeHp);
         manaStats.AddOnChangeAction(ChangeMana);
-    }
-
-    // TODO: very strong drawback for the performande, everything writen here must be removed
-    void Update()
-    {
-        chargeProgress.progress = playerSpell.GetSpellChargingPercent();
+        playerSpell.RegisterOnHandedManaPercentageChange(ChangeHandedPercentage);
     }
 
     private void ChangeHp(float newHp)
@@ -44,5 +39,10 @@ public class PlayerStatsUI : MonoBehaviour
     private void ChangeMana(float newMana)
     {
         manaLabel.text = $"Mana: {newMana}";
+    }
+
+    private void ChangeHandedPercentage(int value)
+    {
+        chargeProgress.progress = value;
     }
 }
