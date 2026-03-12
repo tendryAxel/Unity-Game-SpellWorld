@@ -1,15 +1,21 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using MyUILibrary;
 
 public class PlayerStatsUI : MonoBehaviour
 {
     private Label hpLabel;
     private Label manaLabel;
+    // TODO: need rename
+    private RadialProgress charge;
+    private int chargingProgress;
 
     [SerializeField]
     private HealthPointStats hpStats;
     [SerializeField]
     private ManaPointStats manaStats;
+    [SerializeField]
+    private PlayerSpellSc playerSpell;
 
     void OnEnable()
     {
@@ -17,12 +23,19 @@ public class PlayerStatsUI : MonoBehaviour
 
         hpLabel = root.Q<Label>("hpLabel");
         manaLabel = root.Q<Label>("manaLabel");
+        charge = root.Q<RadialProgress>("chargeProgress");
 
         ChangeHp(hpStats.GetValue);
         ChangeMana(manaStats.GetValue);
 
         hpStats.AddOnChangeAction(ChangeHp);
         manaStats.AddOnChangeAction(ChangeMana);
+    }
+
+    // TODO: very strong drawback for the performande, everything writen here must be removed
+    void Update()
+    {
+        charge.progress = playerSpell.GetSpellChargingPercent();
     }
 
     private void ChangeHp(float newHp)

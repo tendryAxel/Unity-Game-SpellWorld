@@ -238,6 +238,8 @@ MonoBehaviour:
   shoots:
   - {fileID: 11400000, guid: 2331f5de971e5404caca824edd4d42c2, type: 2}
   currentShootId: 0
+  manaPointStats: {fileID: 0}
+  shootManagement: {fileID: 0}
 --- !u!114 &-8509229034060313646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ManaPointStats
   maxValue: 100
   value: 100
-  manaOutputRate: 10
+  manaOutputRate: 1
 --- !u!1 &7736286604097016984
 GameObject:
   m_ObjectHideFlags: 0

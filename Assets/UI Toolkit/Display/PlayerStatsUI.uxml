@@ -1,17 +1,15 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Display/PlayerStatsUI.uss?fileID=7433441132597879392&amp;guid=48f294cdd206edc4583f2dfdfcfab0b8&amp;type=3#PlayerStatsUI"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Display/RadialProgress.uss?fileID=7433441132597879392&amp;guid=c6b1bfea542e7be44b1933cf0b4a70c0&amp;type=3#RadialProgress"/>
     <ui:VisualElement class="root">
-        <!-- Crosshair -->
-        <ui:VisualElement class="crosshair">
-            <ui:VisualElement class="line horizontal" />
-            <ui:VisualElement class="line vertical" />
+        <ui:VisualElement class="crosshair" style="align-items: center; justify-content: center;">
+            <MyUILibrary.RadialProgress progress="0" style="height: 20px; width: 48px; align-items: center;" name="chargeProgress"/>
+            <ui:VisualElement class="line horizontal"/>
+            <ui:VisualElement class="line vertical"/>
         </ui:VisualElement>
-
-        <!-- Stats -->
         <ui:VisualElement class="stats">
-            <ui:Label name="hpLabel" text="HP: 100" />
-            <ui:Label name="manaLabel" text="Mana: 50" />
+            <ui:Label name="hpLabel" text="HP: 100"/>
+            <ui:Label name="manaLabel" text="Mana: 50"/>
         </ui:VisualElement>
-
     </ui:VisualElement>
 </ui:UXML>
