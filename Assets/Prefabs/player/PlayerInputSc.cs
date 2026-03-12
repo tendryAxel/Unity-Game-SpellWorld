@@ -35,6 +35,8 @@ public class PlayerInputSc : MonoBehaviour
     [SerializeField]
     private ManaPointStats manaPointStats;
 
+    private bool isFireActionHolded = false;
+
     void Start()
     {
         Application.targetFrameRate = FPS;
@@ -54,6 +56,7 @@ public class PlayerInputSc : MonoBehaviour
         turnCameraActionReference.action.performed += TurnAction;
 
         fireActionReference.action.performed += FireAction;
+        fireActionReference.action.canceled += UnFireAction;
     }
 
     void OnDisable()
@@ -66,6 +69,7 @@ public class PlayerInputSc : MonoBehaviour
         turnCameraActionReference.action.performed -= TurnAction;
 
         fireActionReference.action.performed -= FireAction;
+        fireActionReference.action.canceled -= UnFireAction;
     }
 
     void DirectionAction(InputAction.CallbackContext callback)
@@ -86,22 +90,12 @@ public class PlayerInputSc : MonoBehaviour
 
     void FireAction(InputAction.CallbackContext callback)
     {
-        Vector3 source = transform.position;
-        Vector3 target = transform.position + (transform.forward * 500);
+        isFireActionHolded = true;
+    }
 
-        try
-        {
-            manaPointStats.TakeMana(10);
-
-            shootManagement.AddShoot(
-                this.playerSpell.GetCurrentShootData(),
-                source, target
-            );
-        }
-        catch (NotEnoughManaException e)
-        {
-            Debug.LogWarning("Not Enough mana.\n" + e);
-        }
+    void UnFireAction(InputAction.CallbackContext callback)
+    {
+        isFireActionHolded = false;
     }
 
     void DirectionActionCancel(InputAction.CallbackContext callback)
@@ -146,5 +140,13 @@ public class PlayerInputSc : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         controller.Move(moveDirection * Time.deltaTime);
+
+        if (isFireActionHolded)
+        {
+            this.playerSpell.LoadAndShoot();
+        } else
+        {
+            this.playerSpell.CancelManaHolding();
+        }
     }
 }
