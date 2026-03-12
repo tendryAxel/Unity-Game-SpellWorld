@@ -1,10 +1,6 @@
 name: Unity Build
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -24,6 +20,12 @@ jobs:
           restore-keys: |
             Library-
 
+      - name: Get project version
+        id: version
+        run: |
+          VERSION=$(grep -m1 bundleVersion ProjectSettings/ProjectSettings.asset | sed 's/.*: //')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Unity Builder
         uses: game-ci/unity-builder@v4
         env:
@@ -33,8 +35,21 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
 
-      - name: Upload Build
+      - name: Zip build
+        run: |
+          cd build
+          zip -r ../SpellWorld-v${{ steps.version.outputs.version }}-${{ github.ref_name }}.zip .
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-windows
-          path: build
+          name: SpellWorld
+          path: SpellWorld-v${{ steps.version.outputs.version }}-${{ github.ref_name }}.zip
+
+      - name: Create GitHub Release
+        if: github.ref_name == 'main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: SpellWorld v${{ steps.version.outputs.version }}
+          files: SpellWorld-v${{ steps.version.outputs.version }}-${{ github.ref_name }}.zip
