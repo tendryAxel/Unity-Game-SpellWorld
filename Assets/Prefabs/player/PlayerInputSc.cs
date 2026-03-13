@@ -6,11 +6,12 @@ public class PlayerInputSc : MonoBehaviour
 {
     public int FPS = 60;
     public float speed = 6.0f;
-    public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
-    public float lookSensitivity = 0.5f;
+    public float jumpSpeed = 7.0f;
+    public float gravity = 9.8f;
+    public float lookSensitivity = 1f;
 
     private Vector3 moveDirection = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
 
     float yRotation;
     float xRotation;
@@ -18,7 +19,7 @@ public class PlayerInputSc : MonoBehaviour
     float currentYRotation;
     float yRotationV;
     float xRotationV;
-    float lookSmoothnes = .1f;
+    float lookSmoothnes = .01f;
 
     public InputActionReference directionActionReference;
     public InputActionReference jumpActionReference;
@@ -107,23 +108,18 @@ public class PlayerInputSc : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            moveDirection.y = jumpSpeed;
+            velocity.y = jumpSpeed;
         }
     }
 
     void ChangeMove(Vector2 direction)
     {
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(direction.x, 0, direction.y);
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-        }
+        moveDirection = new Vector3(direction.x, 0, direction.y);
     }
 
     void ResetChangeMove()
     {
-        moveDirection = Vector2.zero;
+        moveDirection = Vector3.zero;
     }
 
     void ChangeRotation(Vector2 mouseMove)
@@ -137,9 +133,17 @@ public class PlayerInputSc : MonoBehaviour
 
     void Update()
     {
-        moveDirection.y -= gravity * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        controller.Move(moveDirection * Time.deltaTime);
+        // TODO: should be moved to the this.ChangeMove() to reduce performance issues
+        if (controller.isGrounded)
+        {
+            // TODO: issues when appling order for the y velocity here, it must be applied after the * speed, quick fix it by " / speed"
+            velocity = transform.TransformDirection(moveDirection) + (Vector3.up * velocity.y / speed);
+            velocity *= speed;
+        }
+
+        velocity.y -= gravity * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(currentXRotation, currentYRotation, 0);
+        controller.Move(velocity * Time.deltaTime);
 
         if (isFireActionHolded)
         {
